@@ -1,0 +1,23 @@
+Announcing the release of Perl Module Math::Derivative Version 0.01
+Uploaded to CPAN archives under my home directory.
+
+Math::Derivative - Numeric 1st and 2nd order differentiation
+
+This Perl package exports functions for performing numerical first
+ and second order differentiation on data. They functions take
+references to two arrays containing the x and y ordinates of the data
+and return an array of the 1st or 2nd derivative at the given x
+ordinates. The 2nd derivative may optionally be given values to use
+for the first dervivative at the start and end points of the data -
+otherwiswe 'natural' values are used.
+
+Module Entry
+
+6) Data Types and Data Type Utilities (see also Database Interfaces)
+
+Name           DSLI  Description                                  Info
+-----------    ----  -------------------------------------------- -----
+Math::
+::Derivative   Rdpr  1st and 2nd order differentiation of data    JARW
+
+  JARW John A.R. Williams <J.A.R.Williams@aston.ac.uk>
