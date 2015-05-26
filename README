@@ -1,15 +1,46 @@
-Perl Module Math::Derivative - 0.01
+	Math-Derivative, version 0.02, 17 May 2015
 
-     Copyright (c) 1995 John A.R. Williams. All rights reserved.
-     This program is free software; you can redistribute it and/or
-     modify it under the same terms as Perl itself.
+Numeric 1st and 2nd order differentiation.
 
-To install, unzip and untar the archive. In the directory created type
+INSTALLATION
 
-perl Makefile.pl
-make install
+To install this module, run the following commands:
 
-Documentation is in the module file and will be added onto
-perllocal.pod as usual.
+	perl Build.PL
+	./Build
+	./Build test
+	./Build install
 
-I can be contacted at <Email: J.A.R.Williams@aston.ac.uk>
+SUPPORT AND DOCUMENTATION
+
+After installing, you can find documentation for this module with the
+perldoc command.
+
+    perldoc Math::Derivative
+
+You can also look for information at:
+
+    RT, CPAN's request tracker (report bugs here)
+        http://rt.cpan.org/NoAuth/Bugs.html?Dist=Math-Derivative
+
+    AnnoCPAN, Annotated CPAN documentation
+        http://annocpan.org/dist/Math-Derivative
+
+    CPAN Ratings
+        http://cpanratings.perl.org/d/Math-Derivative
+
+    Search CPAN
+        http://search.cpan.org/dist/Math-Derivative/
+
+
+LICENSE AND COPYRIGHT
+
+Copyright (C) 1995 John A. R. Williams.
+This module is currently maintained by John M. Gamble
+
+This program is free software; you can redistribute it and/or modify it
+under the terms of either: the GNU General Public License as published
+by the Free Software Foundation; or the Artistic License.
+
+See L<http://dev.perl.org/licenses/> for more information.
+

@@ -1,0 +1,12 @@
+Revision history for Math-Derivative
+
+0.02
+	17 May 2015
+	- Get package up to more-or-less current standards using
+	  Module-Starter. Tests and documentation updates come
+	  with the next release.
+
+0.01    26 Dec 1995
+        First version, released on an unsuspecting world.
+
+
