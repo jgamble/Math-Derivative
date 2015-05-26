@@ -35,7 +35,7 @@ package Math::Derivative;
 @EXPORT_OK=qw(Derivative1 Derivative2);
 use strict;
 
-our $VERSION = 0.02;
+our $VERSION = 0.03;
 
 sub Derivative1 {
     my ($x,$y)=@_;

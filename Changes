@@ -1,5 +1,8 @@
 Revision history for Math-Derivative
 
+0.03
+	26 May 2015
+	- Remove pod-coverage.t from the test directory.
 0.02
 	17 May 2015
 	- Get package up to more-or-less current standards using
