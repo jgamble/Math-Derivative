@@ -17,9 +17,9 @@ name: Math-Derivative
 provides:
   Math::Derivative:
     file: lib/Math/Derivative.pm
-    version: '0.03'
+    version: '0.04'
 requires:
   perl: v5.8.3
 resources:
   license: http://dev.perl.org/licenses/
-version: '0.03'
+version: '0.04'
