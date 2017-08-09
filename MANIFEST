@@ -8,6 +8,7 @@ t/11-firstd.t
 t/12-firstd.t
 t/13-firstd.t
 t/14-firstd.t
+t/21-secondd.t
 t/manifest.t
 t/pod.t
 Makefile.PL
