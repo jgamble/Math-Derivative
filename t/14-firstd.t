@@ -27,7 +27,7 @@ my @first_derivative = forwarddiff(\@height, \@temperature);
 
 my $msg = "";
 
-for my $j (0 .. $#expected)
+for my $j (0 .. $#expected - 1)
 {
 	if (&$fltcmp($first_derivative[$j], $expected[$j]) != 0)
 	{
