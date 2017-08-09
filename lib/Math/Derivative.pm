@@ -9,7 +9,6 @@ our %EXPORT_TAGS = (all => [qw(
 	Derivative2
 	centraldiff
 	forwarddiff
-	seconddx
 )]);
 
 our @EXPORT_OK = (@{$EXPORT_TAGS{all}});
@@ -32,10 +31,9 @@ Math::Derivative - Numeric 1st and 2nd order differentiation
 
     @dydx = centraldiff(\@x, \@y);
 
-    @d2ydx2 = seconddx(\@x, \@y);
-
     @dydx = Derivative1(\@x, \@y);     # A synonym for centraldiff()
-    @d2ydx2 = Derivative2(\@x, \@y);   # A synonym for seconddx()
+
+    @d2ydx2 = Derivative2(\@x, \@y, $yd0, $ydn);
 
 =head1 DESCRIPTION
 
@@ -55,6 +53,18 @@ The functions may be imported by name or by using the tag ":all".
 Take the references to two arrays containing the x and y ordinates of
 the data, and return an array of approximate first derivatives at the
 given x ordinates, using the forward difference approximation.
+
+The last term is actually formed using a backward difference formula,
+there being no array item to subtract from at the end of the array.
+If you want to use derivatives strictly formed from the forward
+difference formula, use only the values from [0 .. #y-1], e.g.:
+
+    @dydx = (forwarddiff(\@x, \@y))[0 .. $#y-1];
+
+or, more simply,
+
+    @dydx = forwarddiff(\@x, \@y);
+    pop @dydx;
 
 =cut
 
@@ -86,7 +96,11 @@ given x ordinates.
 
 The algorithm used three data points to calculate the derivative, except
 at the end points, where by necessity the forward difference algorithm
-is used instead.
+is used instead. If you want to use derivatives strictly formed from
+the central difference formula, use only the values from [1 .. #y-1],
+e.g.:
+
+    @dydx = (centraldiff(\@x, \@y))[1 .. $#y-1];
 
 =cut
 
@@ -109,20 +123,21 @@ sub centraldiff
 	return @y2;
 }
 
-=head3 seconddx()
+=head3 Derivative2()
 
-    @d2ydx2 = seconddx(\@x, \@y);
+    @d2ydx2 = Derivative2(\@x, \@y);
 
 or
 
-    @d2ydx2 = seconddx(\@x, \@y, $yp0, $ypn);
+    @d2ydx2 = Derivative2(\@x, \@y, $yp0, $ypn);
 
 Take references to two arrays containing the x and y ordinates of the
-data and return an array of approximate second derivatives at the given x ordinates.
+data and return an array of approximate second derivatives at the given
+x ordinates.
 
 You may optionally give values to use as the first derivatives at the
 start and end points of the data. If you don't, first derivative values
-will be calculated from the arrays for you.
+will be assumed to be zero.
 
 =cut
 
@@ -183,73 +198,17 @@ sub seconddx
 
 =head3 Derivative1()
 
-A synonym for forwarddiff().
-
-=head3 Derivative2()
-
-A synonym for seconddx().
+A synonym for centraldiff().
 
 =cut
 
 #
 # Alias Derivative1() to centraldiff(), and Derivative2() to
-# seconddx(), preserving the old names.
+# seconddx(), preserving the old names. Not exporting the
+# seconddx name now, as I'm not convinced it's a good name.
 #
 *Derivative1 = \&centraldiff;
 *Derivative2 = \&seconddx;
-
-=head1 COMPARISON OF FUNCTIONS
-
-It is best to compare with a function for which we have exact derivatives. We'll use
-the polynomial C<2*x**4 - 7*x**3 - 2*x**2 - x + 1>:
-
-    use Math::Utils qw(:polynomial);
-    use Math::Derivative qw(:all);
-
-    #
-    # The polynomial, its derivative, and its second derivative.
-    #
-    my @coef = (1, -1, -2, -7, 2);
-    my @dx_coef = @{ pl_derivative(\@coef) };
-    my @d2x_coef = @{ pl_derivative(\@dx_coef) };
-
-    #
-    # The X values in steps of 0.10,
-    # the Y values from the polynomial and its derivatives.
-    #
-    my @xvals = map{$_ / 10} (20 .. 39);
-
-    my @yvals = pl_evaluate(\@coef, \@xvals);
-    my @dx_yvals = pl_evaluate(\@dx_coef, \@xvals);
-
-    #
-    # Get the first derivative approximations,
-    # and compare them.
-    #
-    my @cen_dxdy = centraldiff(\@xvals, \@yvals);
-    my @for_dxdy = forwarddiff(\@xvals, \@yvals);
-
-    print " X      Y            dy       center   forward\n";
-    for my $j (0 .. $#xvals)
-    {
-        printf("%5.2f, %5.2f:     %5.2f   %5.2f   %5.2f\n",
-                $xvals[$j],
-                $yvals[$j],
-                $dx_yvals[$j],
-                $cen_dxdy[$j],
-                $for_dxdy[$j]);
-    }
-
-In this example C<centraldiff()> has better approximations
-than C<forwarddiff()>.
-
-    #
-    # Now compare the values from the second derivative
-    # with the second derivative approximations.
-    #
-    my @d2x_yvals = pl_evaluate(\@d2x_coef, \@xvals);
-    my @d2xdy2 = seconddx(\@xvals, \@yvals);
-
 
 =head1 REFERENCES
 
