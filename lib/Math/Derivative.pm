@@ -145,7 +145,6 @@ sub seconddx
 {
 	my($x, $y, $yp1, $ypn) = @_;
 	my(@y2, @u);
-	my($qn, $un);
 	my $n = $#{$x};
 
 	croak "X and Y array lengths don't match." unless ($n == $#{$y});
@@ -176,17 +175,15 @@ sub seconddx
 
 	if (defined $ypn)
 	{
-		$qn = 0.5;
-		$un = (3.0/($x->[$n]-$x->[$n-1])) *
+		my $qn = 0.5;
+		my $un = (3.0/($x->[$n]-$x->[$n-1])) *
 			($ypn - ($y->[$n] - $y->[$n-1])/($x->[$n] - $x->[$n-1]));
+		$y2[$n] = ($un - $qn * $u[$n-1])/($qn * $y2[$n-1] + 1.0);
 	}
 	else
 	{
-		$qn = 0;
-		$un = 0;
+		$y2[$n] = 0;
 	}
-
-	$y2[$n] = ($un - $qn * $u[$n-1])/($qn * $y2[$n-1] + 1.0);
 
 	for my $i (reverse 0 .. $n-1)
 	{
