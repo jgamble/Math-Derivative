@@ -9,7 +9,7 @@ my $builder = Module::Build->new(
 	dist_abstract => q(Numeric 1st and 2nd order differentiation.),
 	dist_author => [q{J. A. R. Williams},
 			q{John M. Gamble <jgamble@cpan.org>}],
-	dist_version => '1.00',
+	dist_version => '1.01',
 
 	requires => {
 		perl => '5.10.1',
