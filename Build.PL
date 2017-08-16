@@ -21,7 +21,7 @@ my $builder = Module::Build->new(
 
 	build_requires => {
 		'Test::More' => 0,
-		'Math::Utils' => '1.06',
+		'Math::Utils' => '1.10',
 	},
 
 	license => 'perl',
