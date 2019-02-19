@@ -31,6 +31,11 @@ my $builder = Module::Build->new(
 	dynamic_config => 0,
 	release_status => 'stable',
 	add_to_cleanup     => [ 'Math-Derivative-*' ],
+	meta_merge => {
+            resources => {
+                repository => 'git://github.com/jgamble/Math-Derivative.git'
+            },
+	}
 );
 
 $builder->create_build_script();
